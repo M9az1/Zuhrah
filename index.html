@@ -9,53 +9,45 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Allura&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Rose-gold palette pulled from the logo */
     --rg-light:    #e8b9a3;
     --rg-mid:      #c08770;
     --rg-deep:     #a86954;
     --rg-shadow:   #8a5240;
-
-    /* Soft cream backgrounds */
     --cream-1:     #fdf8f4;
     --cream-2:     #f7ede4;
     --cream-3:     #f0e0d2;
-    --blush:       #ead4c4;
-
-    /* Ink for text */
     --ink:         #2a1f1a;
     --ink-soft:    #5c4438;
-    --ink-muted:   #8a7166;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html, body { min-height: 100vh; }
+
   body {
-    min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     color: var(--ink);
     background:
-      radial-gradient(ellipse at top left,    rgba(232,185,163,0.35) 0%, transparent 55%),
-      radial-gradient(ellipse at bottom right, rgba(192,135,112,0.25) 0%, transparent 55%),
-      radial-gradient(ellipse at center,       rgba(253,248,244,1)    0%, transparent 70%),
-      linear-gradient(135deg, #fdf8f4 0%, #f0e0d2 100%);
+      radial-gradient(ellipse 80% 60% at 20% 20%, rgba(232,185,163,0.45) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 60% at 80% 80%, rgba(192,135,112,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse at center, rgba(253,248,244,0.6) 0%, transparent 70%),
+      linear-gradient(135deg, #fdf8f4 0%, #ead4c4 100%);
     overflow-x: hidden;
     position: relative;
   }
 
-  /* Subtle paper-grain texture */
-  body::before {
-    content: '';
+  /* Decorative palm corners — bigger on desktop */
+  .palm-deco {
     position: fixed;
-    inset: 0;
     pointer-events: none;
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(192,135,112,0.06) 0%, transparent 40%),
-      radial-gradient(circle at 80% 70%, rgba(168,105,84,0.05) 0%, transparent 40%);
+    opacity: 0.12;
     z-index: 0;
   }
+  .palm-deco.tl { top: -80px; left: -100px; width: 400px; transform: rotate(-20deg); }
+  .palm-deco.br { bottom: -90px; right: -110px; width: 450px; transform: rotate(160deg); }
 
-  /* Scattered rose-gold dot particles like the logo */
+  /* Scattered particles */
   .particle {
     position: fixed;
     border-radius: 50%;
@@ -64,58 +56,48 @@
     z-index: 1;
     animation: drift 20s ease-in-out infinite;
   }
-  .p1  { top: 8%;  left: 12%; width: 5px;  height: 5px; opacity: 0.7; animation-delay: 0s; }
-  .p2  { top: 15%; left: 6%;  width: 3px;  height: 3px; opacity: 0.5; animation-delay: 3s; }
-  .p3  { top: 22%; right: 8%; width: 6px;  height: 6px; opacity: 0.6; animation-delay: 1s; }
-  .p4  { top: 35%; left: 4%;  width: 4px;  height: 4px; opacity: 0.55; animation-delay: 5s; }
-  .p5  { top: 48%; right: 5%; width: 3px;  height: 3px; opacity: 0.5; animation-delay: 2s; }
-  .p6  { top: 60%; left: 8%;  width: 5px;  height: 5px; opacity: 0.65; animation-delay: 6s; }
-  .p7  { top: 72%; right: 10%; width: 4px; height: 4px; opacity: 0.55; animation-delay: 4s; }
-  .p8  { bottom: 10%; left: 14%; width: 6px; height: 6px; opacity: 0.6; animation-delay: 7s; }
-  .p9  { bottom: 20%; right: 12%; width: 3px; height: 3px; opacity: 0.5; animation-delay: 1.5s; }
-  .p10 { bottom: 5%;  right: 20%; width: 4px; height: 4px; opacity: 0.55; animation-delay: 8s; }
-  .p11 { top: 28%; left: 18%; width: 2px; height: 2px; opacity: 0.4; animation-delay: 9s; }
-  .p12 { top: 55%; right: 18%; width: 2px; height: 2px; opacity: 0.4; animation-delay: 2.5s; }
-  .p13 { bottom: 35%; left: 20%; width: 3px; height: 3px; opacity: 0.45; animation-delay: 4.5s; }
-  .p14 { bottom: 45%; right: 8%; width: 5px; height: 5px; opacity: 0.6; animation-delay: 6.5s; }
+  .p1{top:8%;left:12%;width:5px;height:5px;opacity:.7;animation-delay:0s}
+  .p2{top:15%;left:6%;width:3px;height:3px;opacity:.5;animation-delay:3s}
+  .p3{top:22%;right:8%;width:6px;height:6px;opacity:.6;animation-delay:1s}
+  .p4{top:35%;left:4%;width:4px;height:4px;opacity:.55;animation-delay:5s}
+  .p5{top:48%;right:5%;width:3px;height:3px;opacity:.5;animation-delay:2s}
+  .p6{top:60%;left:8%;width:5px;height:5px;opacity:.65;animation-delay:6s}
+  .p7{top:72%;right:10%;width:4px;height:4px;opacity:.55;animation-delay:4s}
+  .p8{bottom:10%;left:14%;width:6px;height:6px;opacity:.6;animation-delay:7s}
+  .p9{bottom:20%;right:12%;width:3px;height:3px;opacity:.5;animation-delay:1.5s}
+  .p10{bottom:5%;right:20%;width:4px;height:4px;opacity:.55;animation-delay:8s}
+  .p11{top:28%;left:18%;width:2px;height:2px;opacity:.4;animation-delay:9s}
+  .p12{top:55%;right:18%;width:2px;height:2px;opacity:.4;animation-delay:2.5s}
+  .p13{bottom:35%;left:20%;width:3px;height:3px;opacity:.45;animation-delay:4.5s}
+  .p14{bottom:45%;right:8%;width:5px;height:5px;opacity:.6;animation-delay:6.5s}
 
   @keyframes drift {
     0%, 100% { transform: translate(0, 0); }
     50%      { transform: translate(8px, -12px); }
   }
 
-  /* Decorative palm silhouettes in background corners */
-  .palm-deco {
-    position: fixed;
-    pointer-events: none;
-    opacity: 0.08;
-    z-index: 0;
-  }
-  .palm-deco.tl { top: -40px; left: -60px; width: 280px; transform: rotate(-20deg); }
-  .palm-deco.br { bottom: -50px; right: -70px; width: 320px; transform: rotate(160deg); }
-
+  /* MOBILE-FIRST: single column, centered */
   .container {
-    max-width: 480px;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 60px 28px 80px;
+    padding: 50px 28px 60px;
     position: relative;
     z-index: 10;
   }
 
-  /* Header */
   .header {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     animation: fadeUp 0.9s ease-out;
   }
 
   .logo {
-    width: 280px;
+    width: 320px;
     max-width: 85%;
     height: auto;
-    margin: 0 auto 18px;
+    margin: 0 auto 8px;
     display: block;
-    filter: drop-shadow(0 10px 35px rgba(168, 105, 84, 0.18));
+    filter: drop-shadow(0 8px 25px rgba(168, 105, 84, 0.15));
     animation: logoIn 1.2s ease-out;
   }
 
@@ -128,19 +110,18 @@
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--rg-deep);
-    margin-bottom: 22px;
+    margin-bottom: 20px;
     letter-spacing: 0.06em;
   }
 
-  /* Ornamental divider — three dots flanked by thin gold lines */
   .divider {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 14px;
-    margin: 18px 0 14px;
+    margin: 14px 0 12px;
   }
   .divider::before, .divider::after {
     content: '';
@@ -148,10 +129,7 @@
     width: 70px;
     background: linear-gradient(90deg, transparent, var(--rg-mid), transparent);
   }
-  .divider-dots {
-    display: flex;
-    gap: 6px;
-  }
+  .divider-dots { display: flex; gap: 6px; }
   .divider-dots span {
     width: 5px;
     height: 5px;
@@ -167,13 +145,12 @@
 
   .tagline {
     font-family: 'Allura', cursive;
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--rg-deep);
     letter-spacing: 0.02em;
     line-height: 1;
   }
 
-  /* Section label */
   .section-label {
     text-align: center;
     font-family: 'Montserrat', sans-serif;
@@ -185,7 +162,6 @@
     text-transform: uppercase;
   }
 
-  /* Links */
   .links {
     display: flex;
     flex-direction: column;
@@ -232,7 +208,7 @@
   .link-card:hover {
     transform: translateY(-3px);
     box-shadow:
-      0 12px 30px rgba(168, 105, 84, 0.18),
+      0 12px 30px rgba(168, 105, 84, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
     border-color: var(--rg-mid);
   }
@@ -285,10 +261,9 @@
     color: var(--rg-deep);
   }
 
-  /* Footer */
   .footer {
     text-align: center;
-    margin-top: 60px;
+    margin-top: 50px;
     opacity: 0;
     animation: fadeUp 0.7s ease-out 0.8s forwards;
   }
@@ -313,10 +288,62 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* === DESKTOP: side-by-side layout === */
+  @media (min-width: 900px) {
+    .container {
+      max-width: 1100px;
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .header {
+      margin-bottom: 0;
+      text-align: center;
+    }
+    .logo {
+      width: 480px;
+      max-width: 100%;
+      margin-bottom: 12px;
+    }
+    .name-arabic {
+      font-size: 1.8rem;
+    }
+    .tagline {
+      font-size: 2.8rem;
+    }
+    .links-section {
+      display: flex;
+      flex-direction: column;
+    }
+    .section-label {
+      text-align: left;
+      margin-bottom: 28px;
+    }
+    .link-card {
+      padding: 18px 26px;
+    }
+    .icon-wrap {
+      width: 52px;
+      height: 52px;
+    }
+    .icon-wrap svg { width: 26px; height: 26px; }
+    .link-label { font-size: 1.4rem; }
+    .link-handle { font-size: 0.85rem; }
+    .footer {
+      grid-column: 1 / -1;
+      margin-top: 60px;
+    }
+    .palm-deco.tl { width: 500px; top: -100px; left: -120px; }
+    .palm-deco.br { width: 550px; bottom: -120px; right: -130px; }
+  }
+
   @media (max-width: 400px) {
-    .container { padding: 40px 20px 60px; }
-    .logo { width: 230px; }
-    .tagline { font-size: 1.7rem; }
+    .container { padding: 36px 18px 50px; }
+    .logo { width: 260px; }
+    .tagline { font-size: 1.9rem; }
     .link-card { padding: 14px 18px; gap: 14px; }
     .icon-wrap { width: 44px; height: 44px; }
     .icon-wrap svg { width: 22px; height: 22px; }
@@ -326,7 +353,6 @@
 </head>
 <body>
 
-<!-- Background palm decorations -->
 <svg class="palm-deco tl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
   <g stroke="#a86954" stroke-width="1.5" fill="none" stroke-linecap="round">
     <path d="M 100 200 Q 105 140 110 80"/>
@@ -351,7 +377,6 @@
   </g>
 </svg>
 
-<!-- Scattered particles -->
 <div class="particle p1"></div>
 <div class="particle p2"></div>
 <div class="particle p3"></div>
@@ -382,89 +407,91 @@
     <p class="tagline">welcome</p>
   </header>
 
-  <p class="section-label">— Connect With Me —</p>
+  <div class="links-section">
+    <p class="section-label">— Connect With Me —</p>
 
-  <main class="links">
+    <main class="links">
 
-    <a class="link-card" href="https://www.instagram.com/zuhrah_al_surf?igsh=MTV0c2pvNGV4NGFpdA==" target="_blank" rel="noopener">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
-          <rect x="3" y="3" width="18" height="18" rx="5" ry="5"/>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2.5"/>
+      <a class="link-card" href="https://www.instagram.com/zuhrah_al_surf?igsh=MTV0c2pvNGV4NGFpdA==" target="_blank" rel="noopener">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <div class="link-text">
+          <div class="link-label">Instagram</div>
+          <div class="link-handle">@zuhrah_al_surf</div>
+        </div>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M9 18l6-6-6-6"/>
         </svg>
-      </div>
-      <div class="link-text">
-        <div class="link-label">Instagram</div>
-        <div class="link-handle">@zuhrah_al_surf</div>
-      </div>
-      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M9 18l6-6-6-6"/>
-      </svg>
-    </a>
+      </a>
 
-    <a class="link-card" href="https://www.tiktok.com/@butterflyzozo1?_r=1&_t=ZS-96ZbF4TxXmv" target="_blank" rel="noopener">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="#fff">
-          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.6a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.03z"/>
+      <a class="link-card" href="https://www.tiktok.com/@butterflyzozo1?_r=1&_t=ZS-96ZbF4TxXmv" target="_blank" rel="noopener">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="#fff">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.6a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.03z"/>
+          </svg>
+        </div>
+        <div class="link-text">
+          <div class="link-label">TikTok</div>
+          <div class="link-handle">@butterflyzozo1</div>
+        </div>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M9 18l6-6-6-6"/>
         </svg>
-      </div>
-      <div class="link-text">
-        <div class="link-label">TikTok</div>
-        <div class="link-handle">@butterflyzozo1</div>
-      </div>
-      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M9 18l6-6-6-6"/>
-      </svg>
-    </a>
+      </a>
 
-    <a class="link-card" href="https://snapchat.com/t/YeSg2Apz" target="_blank" rel="noopener">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="#fff">
-          <path d="M12.166 2c4.077.057 5.92 2.578 5.886 5.91l-.01.582-.029 1.297c.317-.155.622-.196.844-.196.31 0 .627.067.85.18.6.296.628.726.628.962 0 .47-.452.83-1.226 1.182-.087.04-.215.087-.337.156-.32.158-.793.41-.92.71-.064.151-.04.345.067.582l.01.024c.04.094 1.108 2.612 3.585 3.02.193.032.336.205.323.4-.005.06-.022.115-.054.184-.18.418-.927.726-2.293.94-.045.07-.09.31-.137.495-.04.166-.085.346-.143.526-.073.224-.196.331-.396.331h-.014c-.094 0-.21-.018-.371-.06-.221-.052-.456-.087-.788-.087-.197 0-.4.018-.612.054-.42.07-.78.323-1.197.616-.6.422-1.276.9-2.302.9-.043 0-.087-.005-.135-.005-.044.005-.088.005-.132.005-1.026 0-1.703-.478-2.302-.9-.418-.293-.78-.546-1.198-.616-.21-.036-.414-.054-.611-.054-.332 0-.567.035-.788.087-.16.042-.277.06-.371.06-.2 0-.323-.107-.397-.331-.057-.18-.103-.36-.143-.526-.046-.184-.092-.426-.137-.495-1.366-.214-2.114-.522-2.293-.94-.032-.07-.05-.124-.054-.184-.013-.195.13-.368.323-.4 2.477-.408 3.545-2.926 3.586-3.02l.009-.024c.107-.237.13-.43.067-.582-.127-.3-.6-.552-.92-.71-.122-.069-.25-.116-.337-.156-.774-.352-1.226-.712-1.226-1.182 0-.236.028-.666.628-.962.223-.113.54-.18.85-.18.222 0 .527.041.844.196l-.029-1.297-.01-.582C6.247 4.578 8.09 2.057 12.166 2z"/>
+      <a class="link-card" href="https://snapchat.com/t/YeSg2Apz" target="_blank" rel="noopener">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="#fff">
+            <path d="M12.166 2c4.077.057 5.92 2.578 5.886 5.91l-.01.582-.029 1.297c.317-.155.622-.196.844-.196.31 0 .627.067.85.18.6.296.628.726.628.962 0 .47-.452.83-1.226 1.182-.087.04-.215.087-.337.156-.32.158-.793.41-.92.71-.064.151-.04.345.067.582l.01.024c.04.094 1.108 2.612 3.585 3.02.193.032.336.205.323.4-.005.06-.022.115-.054.184-.18.418-.927.726-2.293.94-.045.07-.09.31-.137.495-.04.166-.085.346-.143.526-.073.224-.196.331-.396.331h-.014c-.094 0-.21-.018-.371-.06-.221-.052-.456-.087-.788-.087-.197 0-.4.018-.612.054-.42.07-.78.323-1.197.616-.6.422-1.276.9-2.302.9-.043 0-.087-.005-.135-.005-.044.005-.088.005-.132.005-1.026 0-1.703-.478-2.302-.9-.418-.293-.78-.546-1.198-.616-.21-.036-.414-.054-.611-.054-.332 0-.567.035-.788.087-.16.042-.277.06-.371.06-.2 0-.323-.107-.397-.331-.057-.18-.103-.36-.143-.526-.046-.184-.092-.426-.137-.495-1.366-.214-2.114-.522-2.293-.94-.032-.07-.05-.124-.054-.184-.013-.195.13-.368.323-.4 2.477-.408 3.545-2.926 3.586-3.02l.009-.024c.107-.237.13-.43.067-.582-.127-.3-.6-.552-.92-.71-.122-.069-.25-.116-.337-.156-.774-.352-1.226-.712-1.226-1.182 0-.236.028-.666.628-.962.223-.113.54-.18.85-.18.222 0 .527.041.844.196l-.029-1.297-.01-.582C6.247 4.578 8.09 2.057 12.166 2z"/>
+          </svg>
+        </div>
+        <div class="link-text">
+          <div class="link-label">Snapchat</div>
+          <div class="link-handle">add me on snap</div>
+        </div>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M9 18l6-6-6-6"/>
         </svg>
-      </div>
-      <div class="link-text">
-        <div class="link-label">Snapchat</div>
-        <div class="link-handle">add me on snap</div>
-      </div>
-      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M9 18l6-6-6-6"/>
-      </svg>
-    </a>
+      </a>
 
-    <a class="link-card" href="https://wa.me/966504783242" target="_blank" rel="noopener">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="#fff">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+      <a class="link-card" href="https://wa.me/966504783242" target="_blank" rel="noopener">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="#fff">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+          </svg>
+        </div>
+        <div class="link-text">
+          <div class="link-label">WhatsApp</div>
+          <div class="link-handle">050 478 3242</div>
+        </div>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M9 18l6-6-6-6"/>
         </svg>
-      </div>
-      <div class="link-text">
-        <div class="link-label">WhatsApp</div>
-        <div class="link-handle">050 478 3242</div>
-      </div>
-      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M9 18l6-6-6-6"/>
-      </svg>
-    </a>
+      </a>
 
-    <a class="link-card" href="mailto:Zuhrahq@gmail.com">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-          <polyline points="22,6 12,13 2,6"/>
+      <a class="link-card" href="mailto:Zuhrahq@gmail.com">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="link-text">
+          <div class="link-label">Email</div>
+          <div class="link-handle">Zuhrahq@gmail.com</div>
+        </div>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M9 18l6-6-6-6"/>
         </svg>
-      </div>
-      <div class="link-text">
-        <div class="link-label">Email</div>
-        <div class="link-handle">Zuhrahq@gmail.com</div>
-      </div>
-      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M9 18l6-6-6-6"/>
-      </svg>
-    </a>
+      </a>
 
-  </main>
+    </main>
+  </div>
 
   <footer class="footer">
     <p class="footer-text">thank you for visiting</p>
